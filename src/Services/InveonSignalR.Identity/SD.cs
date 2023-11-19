@@ -1,5 +1,6 @@
 ﻿using Duende.IdentityServer.Models;
 using Duende.IdentityServer;
+using static System.Net.WebRequestMethods;
 
 namespace InveonSignalR.Identity
 {
@@ -39,7 +40,7 @@ namespace InveonSignalR.Identity
                     ClientId="inveon",
                     ClientSecrets= { new Secret("secret".Sha256())},
                     AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris={ "https://localhost:5011/signin-oidc" },
+                    RedirectUris={ "https://localhost:5011/callback" },
                     PostLogoutRedirectUris={"https://localhost:5011/signout-callback-oidc" },
                     AllowedScopes=new List<string>
                     {

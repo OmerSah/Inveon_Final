@@ -10,8 +10,12 @@ namespace ProductService.API
         {
             var mappingConfig = new MapperConfiguration(config =>
             {
-                config.CreateMap<ProductDto, Product>();
-                config.CreateMap<Product, ProductDto>();
+                config.CreateMap<ProductDto, Product>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Title))
+                .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Id));
+                config.CreateMap<Product, ProductDto>()
+                .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ProductId));
             });
 
             return mappingConfig;

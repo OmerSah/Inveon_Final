@@ -68,6 +68,12 @@ namespace ProductService.API.Repositories
         public async Task<IEnumerable<ProductDto>> GetProducts()
         {
             List<Product> productList = await _db.Products.ToListAsync();
+
+            List<Product> allProducts = _db.Products
+            .Include(p => p.Rating)
+            .Include(p => p.Colors) 
+            .ToList();
+
             return _mapper.Map<List<ProductDto>>(productList);
         }
 

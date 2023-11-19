@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using InveonSignalR.Identity.MainModule.Account;
 using InveonSignalR.Identity.Models;
+using InveonSignalR.Identity;
 
 namespace IdentityServerHost.Quickstart.UI
 {
@@ -207,7 +208,8 @@ namespace IdentityServerHost.Quickstart.UI
                 // this triggers a redirect to the external provider for sign-out
                 return SignOut(new AuthenticationProperties { RedirectUri = url }, vm.ExternalAuthenticationScheme);
             }
-            return Redirect(vm.PostLogoutRedirectUri);
+
+            return Redirect("https://localhost:5011/signout-callback-oidc");
            // return View("LoggedOut", vm);
         }
 

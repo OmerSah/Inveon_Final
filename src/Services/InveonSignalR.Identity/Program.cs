@@ -1,3 +1,4 @@
+using Azure;
 using Duende.IdentityServer.Services;
 using InveonSignalR.Identity;
 using InveonSignalR.Identity.Context;
@@ -40,6 +41,14 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+app.UseCors(builder =>
+          builder
+            .WithOrigins("https://localhost:5011")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials()
+        );
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
