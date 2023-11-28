@@ -155,11 +155,11 @@ namespace ShoppingCard.API.Controllers
 
             foreach (var item in checkoutHeaderDto.CartDetails)
             {
-                Console.WriteLine("ITEM: " + item.Product.Name + item.Product.Price);
+                Console.WriteLine("ITEM: " + item.Product.Title + item.Product.Price);
                 BasketItem basketItem = new BasketItem();
                 basketItem.Id = item.ProductId.ToString();
-                basketItem.Name = item.Product.Name;
-                basketItem.Category1 = item.Product.CategoryName;
+                basketItem.Name = item.Product.Title;
+                basketItem.Category1 = item.Product.Category;
                 basketItem.ItemType = BasketItemType.PHYSICAL.ToString();
                 basketItem.Price = (item.Product.Price * item.Count).ToString();
                 basketItems.Add(basketItem);

@@ -103,9 +103,19 @@ namespace ShoppingCard.API.Controllers
         {
             try
             {
+                CouponDto coupon = await _couponRepository.GetCoupon(cartDto.CartHeader.CouponCode);
+
+                if (coupon == null)
+                {
+                    _response.IsSuccess = false;
+                    _response.ErrorMessages = new List<string>() { "Coupon is null" };
+                    return _response;
+                }
+
                 bool isSuccess = await _cartRepository.ApplyCoupon(cartDto.CartHeader.UserId,
                     cartDto.CartHeader.CouponCode);
-                _response.Result = isSuccess;
+                
+                _response.Result = isSuccess ? cartDto.CartHeader.CouponCode: false;
             }
             catch (Exception ex)
             {

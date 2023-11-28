@@ -61,7 +61,10 @@ namespace ProductService.API.Repositories
         {
             //linq select * from Product where Id=productId
             //{Id:1,Name : Product1}
-            Product product = await _db.Products.Where(x => x.ProductId == productId).FirstOrDefaultAsync();
+            Product product = await _db.Products
+                .Include(p => p.Rating)
+                .Include(p => p.Colors)
+                .Where(x => x.ProductId == productId).FirstOrDefaultAsync();
             return _mapper.Map<ProductDto>(product);
         }
 

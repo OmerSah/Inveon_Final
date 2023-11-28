@@ -17,8 +17,8 @@ namespace ProductService.API.Models
 
         [ForeignKey("ProductId")]
         [JsonIgnore]
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
         [JsonIgnore]
-        public Product Product { get; set; }
+        public Product? Product { get; set; }
     }
 }
