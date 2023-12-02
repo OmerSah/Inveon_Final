@@ -6,5 +6,6 @@ namespace OrderService.API.Repositories
     {
         Task<bool> AddOrder(OrderHeader orderHeader);
         Task UpdateOrderPaymentStatus(int orderHeaderId, bool paid);
+        Task<List<OrderHeader>> GetAllOrders(string userId);
     }
 }

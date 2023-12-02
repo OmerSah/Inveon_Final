@@ -49,7 +49,7 @@ namespace ShoppingCard.API.Controllers
                 {
                     return BadRequest();
                 }
-
+            
                 if (!string.IsNullOrEmpty(checkoutHeader.CouponCode))
                 {
                     CouponDto coupon = await _couponRepository.GetCoupon(checkoutHeader.CouponCode);
@@ -93,6 +93,8 @@ namespace ShoppingCard.API.Controllers
 
             Options options = new Options();
 
+            double discountRate = 1;
+
             options.ApiKey = "sandbox-0l8rAJLEGKScJKtCr1BvWCpHj1GMzFOj";
             options.SecretKey = "sandbox-3ApoMiDQOWaryOMlXeWKNkvchqJqDYQb";
             options.BaseUrl = "https://sandbox-api.iyzipay.com";
@@ -100,8 +102,8 @@ namespace ShoppingCard.API.Controllers
             CreatePaymentRequest request = new CreatePaymentRequest();
             request.Locale = Locale.TR.ToString();
             request.ConversationId = new Random().Next(1111, 9999).ToString();
-            request.Price = checkoutHeaderDto.OrderTotal.ToString();
-            request.PaidPrice = checkoutHeaderDto.OrderTotal.ToString();
+            request.Price = (checkoutHeaderDto.OrderTotal).ToString();
+            request.PaidPrice = (checkoutHeaderDto.OrderTotal).ToString();
             request.Currency = Currency.TRY.ToString();
             request.Installment = 1;
             request.BasketId = checkoutHeaderDto.CartHeaderId.ToString();
@@ -151,20 +153,30 @@ namespace ShoppingCard.API.Controllers
             billingAddress.ZipCode = "34742";
             request.BillingAddress = billingAddress;
 
+            if (!string.IsNullOrEmpty(checkoutHeaderDto.CouponCode))
+            {
+                discountRate = 1.0 - checkoutHeaderDto.DiscountTotal / (checkoutHeaderDto.DiscountTotal + checkoutHeaderDto.OrderTotal);
+            }
+
             List<BasketItem> basketItems = new List<BasketItem>();
 
-            foreach (var item in checkoutHeaderDto.CartDetails)
+            var allItems = checkoutHeaderDto.CartDetails;
+
+            for (int i = 0; i < allItems.Count(); i++)
             {
-                Console.WriteLine("ITEM: " + item.Product.Title + item.Product.Price);
+                CartDetailsDto item = allItems.ElementAt(i);
                 BasketItem basketItem = new BasketItem();
                 basketItem.Id = item.ProductId.ToString();
                 basketItem.Name = item.Product.Title;
                 basketItem.Category1 = item.Product.Category;
                 basketItem.ItemType = BasketItemType.PHYSICAL.ToString();
-                basketItem.Price = (item.Product.Price * item.Count).ToString();
+                double itemAmount = 0;
+                itemAmount = item.Product.Price * item.Count * discountRate;
+                itemAmount = Math.Round(itemAmount, 2);
+                basketItem.Price = (itemAmount).ToString();
                 basketItems.Add(basketItem);
             }
-            
+
             request.BasketItems = basketItems;
 
             return Payment.Create(request, options);

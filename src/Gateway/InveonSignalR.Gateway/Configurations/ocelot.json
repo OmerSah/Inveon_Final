@@ -234,6 +234,19 @@
         //"AllowedScopes": [ "infotech" ]
       }
     },
+    //orders
+    {
+      "DownstreamPathTemplate": "/api/orders/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5101
+        }
+      ],
+      "UpstreamPathTemplate": "/api/orders/{userId}",
+      "UpstreamHttpMethod": [ "GET" ],
+    }
 
   ],
   "GlobalConfiguration": {

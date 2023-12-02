@@ -35,5 +35,14 @@ namespace OrderService.API.Repositories
                 await _db.SaveChangesAsync();
             }
         }
+
+        public async Task<List<OrderHeader>> GetAllOrders(string userId)
+        {
+            await using var _db = new ApplicationDbContext(_dbContext);
+            return await _db.OrderHeaders
+                .Include(u => u.OrderDetails)
+                .Where(u => u.UserId == userId)
+                .ToListAsync();
+        }
     }
 }

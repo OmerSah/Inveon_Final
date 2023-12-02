@@ -75,7 +75,7 @@ namespace OrderService.API.Messaging
                 OrderDetails orderDetails = new()
                 {
                     ProductId = detailList.ProductId,
-                    ProductName = detailList.Product.Name,
+                    ProductName = detailList.Product.Title,
                     Price = detailList.Product.Price,
                     Count = detailList.Count
                 };
