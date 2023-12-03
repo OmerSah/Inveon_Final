@@ -20,13 +20,23 @@ namespace ProductService.API.Context
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder
+                .Entity<Product>()
+                .Property(e => e.Category)
+                .HasConversion<string>();
+
+            modelBuilder
+                .Entity<Product>()
+                .Property(e => e.Labels)
+                .HasConversion<string>();
+
             modelBuilder.Entity<Product>().HasData(new Product
             {
                 ProductId = 1,
                 Labels = ProductLabel.Trending,
-                Category = ProductCategory.Fashion,
-                Img = "img1",
-                Hover_Img = "img10",
+                Category = ProductCategory.Ceket,
+                Img = "https://i.ibb.co/txFk7S2/product1.png",
+                Hover_Img = "https://i.ibb.co/DW63yV8/product10.png",
                 Name = "Green Dress For Woman",
                 Price = 38,
                 Description = @"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. 
@@ -46,7 +56,7 @@ The point of using Lorem Ipsum is that it has a more-or-less normal distribution
                 {
                     ColorOptionId = 1,
                     Color = "green",
-                    Image = "img8",
+                    Image = "https://i.ibb.co/HYLB0HY/product8.png",
                     Quantity = 1,
                     ProductId = 1
                 },
@@ -54,7 +64,7 @@ The point of using Lorem Ipsum is that it has a more-or-less normal distribution
                 {
                     ColorOptionId = 2,
                     Color = "red",
-                    Image = "img9",
+                    Image = "https://i.ibb.co/q7BzPCd/product9.png",
                     Quantity = 1,
                     ProductId = 1
                 },
@@ -62,7 +72,7 @@ The point of using Lorem Ipsum is that it has a more-or-less normal distribution
                 {
                     ColorOptionId = 3,
                     Color = "blue",
-                    Image = "img7",
+                    Image = "https://i.ibb.co/Ttnm3Y1/product7.png",
                     Quantity = 1,
                     ProductId = 1
                 }
@@ -72,8 +82,8 @@ The point of using Lorem Ipsum is that it has a more-or-less normal distribution
                 ProductId = 2,
                 Labels = ProductLabel.Discount45Percent,
                 Category = ProductCategory.Fashion,
-                Img = "img2",
-                Hover_Img = "img9",
+                Img = "https://i.ibb.co/KKbNbV6/product2.png",
+                Hover_Img = "https://i.ibb.co/q7BzPCd/product9.png",
                 Name = "T-Shirt For Men",
                 Price = 72,
                 Description = @"Vivamus suscipit tortor eget felis porttitor volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -93,7 +103,7 @@ Proin eget tortor risus. Nulla porttitor accumsan tincidunt. Pellentesque in ips
                 {
                     ColorOptionId = 4,
                     Color = "green",
-                    Image = "img6",
+                    Image = "https://i.ibb.co/Qdf0vcX/product6.png",
                     Quantity = 1,
                     ProductId = 2
                 },
@@ -101,7 +111,7 @@ Proin eget tortor risus. Nulla porttitor accumsan tincidunt. Pellentesque in ips
                 {
                     ColorOptionId = 5,
                     Color = "red",
-                    Image = "img10",
+                    Image = "https://i.ibb.co/DW63yV8/product10.png",
                     Quantity = 1,
                     ProductId = 2
                 },
@@ -109,7 +119,7 @@ Proin eget tortor risus. Nulla porttitor accumsan tincidunt. Pellentesque in ips
                 {
                     ColorOptionId = 6,
                     Color = "blue",
-                    Image = "img5",
+                    Image = "https://i.ibb.co/Y04d07J/product5.png",
                     Quantity = 1,
                     ProductId = 2
                 }
@@ -119,8 +129,8 @@ Proin eget tortor risus. Nulla porttitor accumsan tincidunt. Pellentesque in ips
                 ProductId = 3,
                 Labels = ProductLabel.Discount50Percent,
                 Category = ProductCategory.Fashion,
-                Img = "img3",
-                Hover_Img = "img7",
+                Img = "https://i.ibb.co/1r601Rn/product3.png",
+                Hover_Img = "https://i.ibb.co/Ttnm3Y1/product7.png",
                 Name = "V-Neck Dress",
                 Price = 34,
                 Description = @"Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum primis in 
@@ -140,7 +150,7 @@ faucibus orci luctus et ultrices posuere cubilia Curae;",
                 {
                     ColorOptionId = 7,
                     Color = "green",
-                    Image = "img6",
+                    Image = "https://i.ibb.co/Qdf0vcX/product6.png",
                     Quantity = 1,
                     ProductId = 3
                 },
@@ -148,7 +158,7 @@ faucibus orci luctus et ultrices posuere cubilia Curae;",
                 {
                     ColorOptionId = 8,
                     Color = "red",
-                    Image = "img7",
+                    Image = "https://i.ibb.co/Ttnm3Y1/product7.png",
                     Quantity = 1,
                     ProductId = 3
                 },
@@ -156,7 +166,7 @@ faucibus orci luctus et ultrices posuere cubilia Curae;",
                 {
                     ColorOptionId = 9,
                     Color = "blue",
-                    Image = "img8",
+                    Image = "https://i.ibb.co/HYLB0HY/product8.png",
                     Quantity = 1,
                     ProductId = 3
                 }
@@ -165,9 +175,9 @@ faucibus orci luctus et ultrices posuere cubilia Curae;",
             {
                 ProductId = 4,
                 Labels = ProductLabel.Hot,
-                Category = ProductCategory.Fashion,
-                Img = "img4",
-                Hover_Img = "img6",
+                Category = ProductCategory.Ayakkabi,
+                Img = "https://i.ibb.co/CJh01hw/product4.png",
+                Hover_Img = "https://i.ibb.co/Qdf0vcX/product6.png",
                 Name = "Maxi Dress",
                 Price = 43,
                 Description = @"Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vestibulum ac diam sit 
@@ -187,7 +197,7 @@ amet quam vehicula elementum sed sit amet dui. Quisque velit nisi, pretium ut la
                 {
                     ColorOptionId = 10,
                     Color = "green",
-                    Image = "img3",
+                    Image = "https://i.ibb.co/1r601Rn/product3.png",
                     Quantity = 1,
                     ProductId = 4
                 },
@@ -195,7 +205,7 @@ amet quam vehicula elementum sed sit amet dui. Quisque velit nisi, pretium ut la
                 {
                     ColorOptionId = 11,
                     Color = "red",
-                    Image = "img9",
+                    Image = "https://i.ibb.co/q7BzPCd/product9.png",
                     Quantity = 1,
                     ProductId = 4
                 },
@@ -203,7 +213,7 @@ amet quam vehicula elementum sed sit amet dui. Quisque velit nisi, pretium ut la
                 {
                     ColorOptionId = 12,
                     Color = "blue",
-                    Image = "img5",
+                    Image = "https://i.ibb.co/Y04d07J/product5.png",
                     Quantity = 1,
                     ProductId = 4
                 }
@@ -212,9 +222,9 @@ amet quam vehicula elementum sed sit amet dui. Quisque velit nisi, pretium ut la
             {
                 ProductId = 5,
                 Labels = ProductLabel.Upcoming,
-                Category = ProductCategory.Fashion,
-                Img = "img5",
-                Hover_Img = "img1",
+                Category = ProductCategory.Jeans,
+                Img = "https://i.ibb.co/Y04d07J/product5.png",
+                Hover_Img = "https://i.ibb.co/txFk7S2/product1.png",
                 Name = "Fit-Flare Dress",
                 Price = 52,
                 Description = @"Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -234,7 +244,7 @@ Vivamus suscipit tortor eget felis porttitor volutpat. Nulla quis lorem ut liber
                 {
                     ColorOptionId = 13,
                     Color = "green",
-                    Image = "img10",
+                    Image = "https://i.ibb.co/DW63yV8/product10.png",
                     Quantity = 1,
                     ProductId = 5
                 },
@@ -242,7 +252,7 @@ Vivamus suscipit tortor eget felis porttitor volutpat. Nulla quis lorem ut liber
                 {
                     ColorOptionId = 14,
                     Color = "red",
-                    Image = "img9",
+                    Image = "https://i.ibb.co/q7BzPCd/product9.png",
                     Quantity = 1,
                     ProductId = 5
                 },
@@ -250,7 +260,7 @@ Vivamus suscipit tortor eget felis porttitor volutpat. Nulla quis lorem ut liber
                 {
                     ColorOptionId = 15,
                     Color = "blue",
-                    Image = "img2",
+                    Image = "https://i.ibb.co/KKbNbV6/product2.png",
                     Quantity = 1,
                     ProductId = 5
                 }
@@ -259,9 +269,9 @@ Vivamus suscipit tortor eget felis porttitor volutpat. Nulla quis lorem ut liber
             {
                 ProductId = 6,
                 Labels = ProductLabel.Upcoming,
-                Category = ProductCategory.Fashion,
-                Img = "img6",
-                Hover_Img = "img4",
+                Category = ProductCategory.Canta,
+                Img = "https://i.ibb.co/Qdf0vcX/product6.png",
+                Hover_Img = "https://i.ibb.co/CJh01hw/product4.png",
                 Name = "Midi Dress",
                 Price = 14,
                 Description = @"Nulla quis lorem ut libero malesuada feugiat. Quisque velit nisi, pretium ut lacinia in, elementum ProductId enim. 
@@ -281,7 +291,7 @@ Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Donec sollici
                 {
                     ColorOptionId = 16,
                     Color = "green",
-                    Image = "img7",
+                    Image = "https://i.ibb.co/Ttnm3Y1/product7.png",
                     Quantity = 1,
                     ProductId = 6
                 },
@@ -289,7 +299,7 @@ Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Donec sollici
                 {
                     ColorOptionId = 17,
                     Color = "red",
-                    Image = "img8",
+                    Image = "https://i.ibb.co/HYLB0HY/product8.png",
                     Quantity = 1,
                     ProductId = 6
                 },
@@ -297,7 +307,7 @@ Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Donec sollici
                 {
                     ColorOptionId = 18,
                     Color = "blue",
-                    Image = "img9",
+                    Image = "https://i.ibb.co/q7BzPCd/product9.png",
                     Quantity = 1,
                     ProductId = 6
                 }
@@ -306,9 +316,9 @@ Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Donec sollici
             {
                 ProductId = 7,
                 Labels = ProductLabel.Trending,
-                Category = ProductCategory.Fashion,
-                Img = "img7",
-                Hover_Img = "img3",
+                Category = ProductCategory.Canta,
+                Img = "https://i.ibb.co/Ttnm3Y1/product7.png",
+                Hover_Img = "https://i.ibb.co/1r601Rn/product3.png",
                 Name = "Tulip Dress",
                 Price = 41,
                 Description = @"Donec rutrum congue leo eget malesuada. Curabitur arcu erat, accumsan ProductId imperdiet et, porttitor at sem. 
@@ -328,7 +338,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque velit nisi, pre
                 {
                     ColorOptionId = 19,
                     Color = "green",
-                    Image = "img2",
+                    Image = "https://i.ibb.co/KKbNbV6/product2.png",
                     Quantity = 1,
                     ProductId = 7
                 },
@@ -336,7 +346,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque velit nisi, pre
                 {
                     ColorOptionId = 20,
                     Color = "red",
-                    Image = "img8",
+                    Image = "https://i.ibb.co/HYLB0HY/product8.png",
                     Quantity = 1,
                     ProductId = 7
                 },
@@ -344,7 +354,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque velit nisi, pre
                 {
                     ColorOptionId = 21,
                     Color = "blue",
-                    Image = "img1",
+                    Image = "https://i.ibb.co/txFk7S2/product1.png",
                     Quantity = 1,
                     ProductId = 7
                 }
@@ -353,9 +363,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque velit nisi, pre
             {
                 ProductId = 8,
                 Labels = ProductLabel.BestSelling,
-                Category = ProductCategory.Fashion,
-                Img = "img8",
-                Hover_Img = "img2",
+                Category = ProductCategory.Tshirts,
+                Img = "https://i.ibb.co/HYLB0HY/product8.png",
+                Hover_Img = "https://i.ibb.co/KKbNbV6/product2.png",
                 Name = "Skater Dress",
                 Price = 21,
                 Description = @"Nulla quis lorem ut libero malesuada feugiat. Donec sollicitudin molestie malesuada.
@@ -375,7 +385,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo
                 {
                     ColorOptionId = 22,
                     Color = "green",
-                    Image = "img9",
+                    Image = "https://i.ibb.co/q7BzPCd/product9.png",
                     Quantity = 1,
                     ProductId = 8
                 },
@@ -383,7 +393,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo
                 {
                     ColorOptionId = 23,
                     Color = "red",
-                    Image = "img8",
+                    Image = "https://i.ibb.co/HYLB0HY/product8.png",
                     Quantity = 1,
                     ProductId = 8
                 },
@@ -391,7 +401,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo
                 {
                     ColorOptionId = 24,
                     Color = "blue",
-                    Image = "img10",
+                    Image = "https://i.ibb.co/DW63yV8/product10.png",
                     Quantity = 1,
                     ProductId = 8
                 }
@@ -400,9 +410,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo
             {
                 ProductId = 9,
                 Labels = ProductLabel.Popular,
-                Category = ProductCategory.Fashion,
-                Img = "img9",
-                Hover_Img = "img1",
+                Category = ProductCategory.Ayakkabi,
+                Img = "https://i.ibb.co/q7BzPCd/product9.png",
+                Hover_Img = "https://i.ibb.co/txFk7S2/product1.png",
                 Name = "Boho Tops for Girls",
                 Price = 46,
                 Description = @" Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. 
@@ -422,7 +432,7 @@ Cras ultricies ligula sed magna dictum porta. Donec sollicitudin molestie malesu
                 {
                     ColorOptionId = 25,
                     Color = "green",
-                    Image = "img5",
+                    Image = "https://i.ibb.co/Y04d07J/product5.png",
                     Quantity = 1,
                     ProductId = 9
                 },
@@ -430,7 +440,7 @@ Cras ultricies ligula sed magna dictum porta. Donec sollicitudin molestie malesu
                 {
                     ColorOptionId = 26,
                     Color = "red",
-                    Image = "img6",
+                    Image = "https://i.ibb.co/Qdf0vcX/product6.png",
                     Quantity = 1,
                     ProductId = 9
                 },
@@ -438,7 +448,7 @@ Cras ultricies ligula sed magna dictum porta. Donec sollicitudin molestie malesu
                 {
                     ColorOptionId = 27,
                     Color = "blue",
-                    Image = "img7",
+                    Image = "https://i.ibb.co/Ttnm3Y1/product7.png",
                     Quantity = 1,
                     ProductId = 9
                 }
@@ -448,9 +458,9 @@ Cras ultricies ligula sed magna dictum porta. Donec sollicitudin molestie malesu
             {
                 ProductId = 10,
                 Labels = ProductLabel.TopChoice,
-                Category = ProductCategory.Fashion,
-                Img = "img10",
-                Hover_Img = "img3",
+                Category = ProductCategory.Canta,
+                Img = "https://i.ibb.co/DW63yV8/product10.png",
+                Hover_Img = "https://i.ibb.co/1r601Rn/product3.png",
                 Name = "Skater Dress",
                 Price = 74,
                 Description = @"Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Donec
@@ -470,7 +480,7 @@ rutrum congue leo eget malesuada. Sed porttitor lectus nibh. Proin eget tortor r
                 {
                     ColorOptionId = 28,
                     Color = "green",
-                    Image = "img2",
+                    Image = "https://i.ibb.co/KKbNbV6/product2.png",
                     Quantity = 1,
                     ProductId = 10
                 },
@@ -478,7 +488,7 @@ rutrum congue leo eget malesuada. Sed porttitor lectus nibh. Proin eget tortor r
                 {
                     ColorOptionId = 29,
                     Color = "red",
-                    Image = "img3",
+                    Image = "https://i.ibb.co/1r601Rn/product3.png",
                     Quantity = 1,
                     ProductId = 10
                 },
@@ -486,7 +496,7 @@ rutrum congue leo eget malesuada. Sed porttitor lectus nibh. Proin eget tortor r
                 {
                     ColorOptionId = 30,
                     Color = "blue",
-                    Image = "img4",
+                    Image = "https://i.ibb.co/CJh01hw/product4.png",
                     Quantity = 1,
                     ProductId = 10
                 }

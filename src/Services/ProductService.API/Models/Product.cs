@@ -8,8 +8,10 @@ namespace ProductService.API.Models
     {
         [Key]
         public int ProductId { get; set; }
-        public string Labels { get; set; }
-        public string Category { get; set; }
+        [Column(TypeName = "nvarchar(24)")]
+        public ProductLabel Labels { get; set; }
+        [Column(TypeName = "nvarchar(24)")]
+        public ProductCategory Category { get; set; }
         [Required]
         public string Name { get; set; }
         [Range(1, 1000)]
