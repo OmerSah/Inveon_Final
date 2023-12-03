@@ -8,6 +8,7 @@ namespace ShoppingCard.API.Repositories
 
         CartDto GetCartByUserIdNonAsync(string userId);
         Task<CartDto> CreateUpdateCart(CartDto cartDto);
+        Task<bool> UpdateCartDetails(CartDetailsDto cartDetailsDto);
         Task<bool> RemoveFromCart(int cartDetailsId);
         Task<bool> ApplyCoupon(string userId, string couponCode);
         Task<bool> RemoveCoupon(string userId);

@@ -82,12 +82,57 @@ namespace ShoppingCard.API.Controllers
             return _response;
         }
 
+        [HttpPost("UpdateDetails")]
+        public async Task<object> UpdateDetails([FromBody] CartDetailsDto cartDetailsDto)
+        {
+            try
+            {
+                bool isSuccess = await _cartRepository.UpdateCartDetails(cartDetailsDto);
+                _response.IsSuccess = isSuccess;
+                _response.Result = isSuccess;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+            }
+            return _response;
+        }
+
         [HttpPost("RemoveCart")]
         public async Task<object> RemoveCart([FromBody] int cartId)
         {
             try
             {
                 bool isSuccess = await _cartRepository.RemoveFromCart(cartId);
+                if (!isSuccess)
+                {
+                    _response.IsSuccess = false;
+                    _response.ErrorMessages = new List<string>() { "Failed to remove from cart" };
+                    return _response;
+                }
+                _response.Result = isSuccess;
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+            }
+            return _response;
+        }
+
+        [HttpPost("ClearCart")]
+        public async Task<object> ClearCart([FromBody] string userId)
+        {
+            try
+            {
+                bool isSuccess = await _cartRepository.ClearCart(userId);
+                if (!isSuccess)
+                {
+                    _response.IsSuccess = false;
+                    _response.ErrorMessages = new List<string>() { "Failed to clear cart" };
+                    return _response;
+                }
                 _response.Result = isSuccess;
             }
             catch (Exception ex)

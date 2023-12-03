@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Iyzipay.Model;
 using Microsoft.EntityFrameworkCore;
 using ShoppingCard.API.Context;
 using ShoppingCard.API.Dtos;
@@ -39,6 +40,35 @@ namespace ShoppingCard.API.Repositories
 
             }
             return false;
+        }
+
+        public async Task<bool> UpdateCartDetails(CartDetailsDto cartDetailsDto)
+        {
+            try
+            {
+                CartDetails product = _mapper.Map<CartDetails>(cartDetailsDto);
+
+
+                CartDetails cartDetails = await _db.CartDetails
+                    .FirstOrDefaultAsync(u => u.CartDetailsId == product.CartDetailsId);
+
+                if (cartDetails == null)
+                {
+                    return false;
+                }
+
+                cartDetails.Product = null;
+                cartDetails.Count = product.Count;
+                cartDetails.CartDetailsId = product.CartDetailsId;
+                cartDetails.CartHeaderId = product.CartHeaderId; 
+                _db.CartDetails.Update(cartDetails);
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         public async Task<CartDto> CreateUpdateCart(CartDto cartDto)
