@@ -72,7 +72,38 @@ namespace ShoppingCard.API.Controllers
                 _rabbitMQCartMessageSender.SendMessage(checkoutHeader, "checkoutqueue");
                 EmailDto emailDto = new EmailDto();
                 emailDto.Subject = "Ödeme İşlemi";
-                emailDto.Body = $"Ödeme işleminiz başarıyla gerçekleşmiştir. {checkoutHeader.FirstName} {checkoutHeader.LastName} {checkoutHeader.OrderTotal}$" ;
+                string body = $@"
+                    Merhaba {checkoutHeader.FirstName} {checkoutHeader.LastName},
+
+                    Ödeme işleminiz başarıyla gerçekleşmiştir. Toplam ödeme tutarı {checkoutHeader.OrderTotal} TL olarak belirlenmiştir.
+
+                    İşlem Detayları:
+                    ------------------------------
+                    Adı Soyadı: {checkoutHeader.FirstName} {checkoutHeader.LastName}
+                    E-posta: {checkoutHeader.Email}
+                    Toplam Tutar: {checkoutHeader.OrderTotal} TL               
+
+                    Ödemeniz başarıyla alınmıştır. Satın alımınız için teşekkür ederiz.
+
+                    Sipariş Detayları:
+                    ------------------------------
+                    "
+                    + string.Join(Environment.NewLine, checkoutHeader.CartDetails.Select(x => $" Ürün Adı: {x.Product.Title} \n Adet: {x.Count} \n Fiyat: {x.Product.Price} TL \n")) +
+                    @"
+                    Ödemenizle ilgili herhangi bir sorunuz varsa lütfen bizimle iletişime geçin.
+
+                    Teşekkür eder, güzel günler dileriz.
+
+                    Saygılarımızla,
+                    AND Shopping
+               ";
+
+                var lines = body.Split('\n');
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    lines[i] = lines[i].TrimStart();
+                }
+                emailDto.Body = string.Join('\n', lines);
                 emailDto.To = checkoutHeader.Email;
                 _emailService.SendEmail(emailDto);
                 Console.WriteLine($"Ödeme işleminiz başarıyla gerçekleşmiştir. {checkoutHeader.FirstName} {checkoutHeader.LastName} {checkoutHeader.OrderTotal}$");
