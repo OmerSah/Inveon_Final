@@ -153,6 +153,22 @@
       }
     },
     {
+      "DownstreamPathTemplate": "/api/cart/ClearCart",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5014
+        }
+      ],
+      "UpstreamPathTemplate": "/api/cart/ClearCart",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        //"AuthenticationProviderKey": "Bearer",
+        //"AllowedScopes": [ "infotech" ]
+      }
+    },
+    {
       "DownstreamPathTemplate": "/api/cart/UpdateCart",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -162,6 +178,22 @@
         }
       ],
       "UpstreamPathTemplate": "/api/cart/UpdateCart",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        //"AuthenticationProviderKey": "Bearer",
+        //"AllowedScopes": [ "infotech" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/cart/UpdateDetails",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5014
+        }
+      ],
+      "UpstreamPathTemplate": "/api/cart/UpdateDetails",
       "UpstreamHttpMethod": [ "POST" ],
       "AuthenticationOptions": {
         //"AuthenticationProviderKey": "Bearer",
@@ -196,7 +228,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/favorites/{userId}",
-      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
       "AuthenticationOptions": {
         //"AuthenticationProviderKey": "Bearer",
         //"AllowedScopes": [ "infotech" ]
@@ -245,7 +277,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/orders/{userId}",
-      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamHttpMethod": [ "GET" ]
     }
 
   ],
